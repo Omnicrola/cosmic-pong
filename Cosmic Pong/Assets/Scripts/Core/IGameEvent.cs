@@ -1,4 +1,4 @@
-namespace Assets.Scripts.Events
+namespace Assets.Scripts.Core
 {
     public interface IGameEvent
     {

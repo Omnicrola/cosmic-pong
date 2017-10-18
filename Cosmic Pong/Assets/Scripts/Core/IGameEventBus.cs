@@ -1,7 +1,6 @@
 using System;
-using Assets.Scripts.Events;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Core
 {
     public interface IGameEventBus
     {

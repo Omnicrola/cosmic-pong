@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Events;
+﻿using Assets.Scripts.Core;
+using Assets.Scripts.Core.Events;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -15,7 +16,7 @@ namespace Assets.Scripts
             _audioSource = gameObject.AddComponent<AudioSource>();
 
             var eventBus = GameManager.Instance.EventBus;
-            eventBus.Unsubscribe<BallHitPaddleEvent>(PlayImpactClip);
+            eventBus.Subscribe<BallHitPaddleEvent>(PlayImpactClip);
             eventBus.Subscribe<BallDespawnEvent>(PlayDespawnClip);
             eventBus.Subscribe<BallSpawnEvent>(PlaySpawnClip);
         }

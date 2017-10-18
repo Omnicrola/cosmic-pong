@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Util
+﻿namespace Assets.Scripts.Core
 {
     public interface ILogging
     {

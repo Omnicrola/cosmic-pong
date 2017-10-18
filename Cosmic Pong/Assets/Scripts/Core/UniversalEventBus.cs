@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Assets.Scripts.Events;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Core
 {
     public class UniversalEventBus : IGameEventBus
     {
@@ -26,7 +25,8 @@ namespace Assets.Scripts
                     {
                         var actualException = e.InnerException;
                         Logging.Instance.Log(LogLevel.Error,
-                            "An exception has been thrown by an EventBus handler.\n " + actualException.Message + "\n" + actualException.StackTrace);
+                            "An exception has been thrown by an EventBus handler.\n " + actualException.Message + "\n" +
+                            actualException.StackTrace);
                     }
                 }
             }
@@ -47,7 +47,10 @@ namespace Assets.Scripts
 
         public void Unsubscribe<T>(Action<T> eventHandlerOne) where T : IGameEvent
         {
-            _eventHandlers[typeof(T)].RemoveAll(si => si.Match(eventHandlerOne.Target, eventHandlerOne.Method));
+            if (_eventHandlers.ContainsKey(typeof(T)))
+            {
+                _eventHandlers[typeof(T)].RemoveAll(si => si.Match(eventHandlerOne.Target, eventHandlerOne.Method));
+            }
         }
 
         private class SubscriberInvoker

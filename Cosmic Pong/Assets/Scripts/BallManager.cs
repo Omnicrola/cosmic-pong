@@ -1,5 +1,6 @@
 ﻿using System.Collections;
-using Assets.Scripts.Events;
+using Assets.Scripts.Core;
+using Assets.Scripts.Core.Events;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -8,6 +9,7 @@ namespace Assets.Scripts
     {
         public GameObject RespawnTarget;
         public GameObject Ball;
+        public float RespawnTime = 5;
 
         void Start()
         {
@@ -27,15 +29,20 @@ namespace Assets.Scripts
         {
             Ball.SetActive(false);
             GameManager.Instance.EventBus.Broadcast(new BallDespawnEvent());
-            ExecuteAfterTime(5);
+            GameManager.Instance.After(5000).Then(() =>
+            {
+                Ball.SetActive(true);
+                Ball.transform.position = RespawnTarget.transform.position;
+                GameManager.Instance.EventBus.Broadcast(new BallSpawnEvent());
+            });
+
+            //            StartCoroutine("RespawnAfterDelay");
         }
 
-        IEnumerator ExecuteAfterTime(float time)
+        IEnumerator RespawnAfterDelay()
         {
-            Debug.Log("Respawning in " + time + " seconds");
-            yield return new WaitForSeconds(time);
+            yield return new WaitForSeconds(RespawnTime);
 
-            Debug.Log("Respawn!");
             Ball.SetActive(true);
             Ball.transform.position = RespawnTarget.transform.position;
             GameManager.Instance.EventBus.Broadcast(new BallSpawnEvent());

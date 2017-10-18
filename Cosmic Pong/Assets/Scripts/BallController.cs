@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Events;
+﻿using Assets.Scripts.Core;
+using Assets.Scripts.Core.Events;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -15,8 +16,6 @@ namespace Assets.Scripts
 
         void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("BALL HIT! " + collision.gameObject.tag);
-
             var tagCollidingWith = collision.gameObject.tag;
             if (tagCollidingWith == Tags.PONG_OUT_OF_BOUNDS)
             {

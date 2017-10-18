@@ -1,4 +1,6 @@
-﻿namespace Assets.Scripts
+﻿using Assets.Scripts.Core;
+
+namespace Assets.Scripts
 {
     internal class GameConstants
     {

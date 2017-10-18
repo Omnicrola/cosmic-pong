@@ -6,5 +6,6 @@
         public static readonly string PONG_OUT_OF_BOUNDS = "pong-out-of-bounds";
         public static readonly string PONG_PADDLE = "pong-paddle";
         public static readonly string PONG_NET = "pong-net";
+        public static readonly string PONG_BALL = "pong-ball";
     }
 }
